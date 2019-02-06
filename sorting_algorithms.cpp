@@ -16,7 +16,7 @@
 #include <time.h>
 #include "general.h"
 
-void bubble_sort(int numbers[], unsigned long length)
+void bubble_sort(int* numbers, unsigned long length)
 {
     bool swapped;
     int temp;
@@ -35,12 +35,28 @@ void bubble_sort(int numbers[], unsigned long length)
     } while (swapped);
 }
 
-void insertion_sort(int numbers[], unsigned long length)
+void insertion_sort(int* numbers, unsigned long length)
 {
-
+    unsigned long j;
+    int key;
+    for (unsigned long i = 1; i < length; i++)
+    {
+        j = i;
+        while (j > 0 && numbers[j - 1] > numbers[j])
+        {
+            key = numbers[i];
+            j = i - 1;
+            while (j >= 0 && numbers[j] > key)
+            {
+                numbers[j + 1] = numbers[j];
+                j--;
+            }
+            numbers[j + 1] = key;
+        }
+    }
 }
 
-void init_random(int numbers[], unsigned long length)
+void init_random(int* numbers, unsigned long length)
 {
    srandom(time(NULL));
    for (unsigned long i = 0; i < length; i++)
